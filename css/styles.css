@@ -174,32 +174,23 @@ button:hover {
 }
 
 .note {
-
+    font-weight: bold;
     background-color: white;
-
     padding: 15px;
-
     border-radius: 8px;
-
-    position: relative;
-
+    position: relative;  
     word-wrap: break-word;
-
-    display: flex;
-
+    display: flex;  
     flex-direction: column;
-
     justify-content: space-between;
-
-    height: 150px;
-    /* fixed height */
-
-}
-
-.note-content {
-
+    height: 300px;
+    width: 300px;
+  
+  }
+   
+  .note-content {
     flex-grow: 1;
-
+  text-decoration: solid;
     overflow: auto;
 
 }
@@ -207,21 +198,14 @@ button:hover {
 .note-buttons {
 
     display: flex;
-
     justify-content: flex-end;
-
     gap: 10px;
-
     margin-top: 10px;
-
-}
-
-.note-buttons button {
-
+  }
+   
+  .note-buttons button {
     background: none;
-
     border: 1px solid #ccc;
-
     padding: 5px 10px;
 
     border-radius: 4px;
