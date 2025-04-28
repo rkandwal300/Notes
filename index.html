@@ -51,33 +51,30 @@
     <div id="mainContent"></div>
 </body>
 <script>
-
-    let editingNoteId = null
+    let editingNoteId = null;
 
     const title = document.getElementById('title');
     const content = document.getElementById('description');
     const mainContent = document.getElementById('mainContent');
     const noteActionsButton = document.getElementsByClassName('note-actions-button');
 
-
-
     function closeDialog() {
-        document.getElementById('create_notes_form').style.display = 'none'
+        document.getElementById('create_notes_form').style.display = 'none';
         title.value = '';
         content.value = "";
     }
 
     function addData() {
-        document.getElementById('create_notes_form').style.display = 'none'
+        document.getElementById('create_notes_form').style.display = 'none';
         const existingNotes = JSON.parse(localStorage.getItem("myNotes")) || [];
 
         if (title.value.length == 0) {
             window.alert("title should not be empty");
-            return
+            return;
         }
         if (content.value.length == 0) {
             window.alert("content should not be empty");
-            return
+            return;
         }
         let formData = {
             title: title.value,
@@ -88,21 +85,19 @@
             formData = {
                 ...formData,
                 id: editingNoteId,
-            }
-         const   updatedNotes = existingNotes.map(node =>
+            };
+            const updatedNotes = existingNotes.map(node =>
                 node.id === editingNoteId ? { ...node, ...formData } : node
-            )
+            );
             localStorage.setItem("myNotes", JSON.stringify(updatedNotes));
         } else {
-
             formData = {
                 ...formData,
                 id: existingNotes.length,
-            }
+            };
             existingNotes.push(formData);
             localStorage.setItem("myNotes", JSON.stringify(existingNotes));
         }
-
 
         title.value = '';
         content.value = '';
@@ -110,14 +105,12 @@
         displayNotes();
     }
 
-
     displayNotes();
 
     function displayNotes() {
         mainContent.innerHTML = '';
 
         const notes = JSON.parse(localStorage.getItem("myNotes")) || [];
-
 
         notes.forEach((note, index) => {
             const noteDiv = document.createElement('div');
@@ -145,7 +138,7 @@
             const deleteButton = document.createElement('button');
             deleteButton.classList.add('note-actions-button');
             deleteButton.innerText = 'Delete';
-            deleteButton.onclick = () => handleDeleteNode(note.id);
+            deleteButton.onclick = () => handleDeleteNode(note.id); // This is where we add the updated function
 
             actionsDiv.appendChild(editButton);
             actionsDiv.appendChild(deleteButton);
@@ -186,7 +179,6 @@
         clearTimeout(pressTimer);
     });
 
-
     document.addEventListener('mousedown', (event) => {
         const isInsideNote = event.target.closest('.note');
         if (!isInsideNote && currentlyOpenActionsDiv) {
@@ -195,18 +187,22 @@
         }
     });
 
+    // Updated handleDeleteNode function with confirmation dialog
     function handleDeleteNode(noteId) {
-        const notes = JSON.parse(localStorage.getItem("myNotes")) || [];
-        localStorage.setItem("myNotes", JSON.stringify(notes.filter(note => note.id !== noteId)));
-        displayNotes()
+        const confirmDelete = window.confirm("Are you sure you want to delete this note?");
+        
+        if (confirmDelete) {
+            const notes = JSON.parse(localStorage.getItem("myNotes")) || [];
+            localStorage.setItem("myNotes", JSON.stringify(notes.filter(note => note.id !== noteId)));
+            displayNotes();
+        }
     }
-
 
     function handleEditNode(noteId) {
         const notes = JSON.parse(localStorage.getItem("myNotes")) || [];
         const currentNote = notes.find(note => note.id === noteId);
         if (!currentNote) return;
-        editingNoteId = currentNote.id
+        editingNoteId = currentNote.id;
 
         document.getElementById('create_notes_form').style.display = 'flex';
         title.value = currentNote.title;
@@ -214,5 +210,6 @@
     }
 
 </script>
+
 
 </html>
