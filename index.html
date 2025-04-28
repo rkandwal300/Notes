@@ -10,7 +10,19 @@
 </head>
 
 <body>
-    <p> Notes</p>
+
+  <div class="container">
+    <h1>Keep Notes</h1>
+
+    <div class="note-input">
+      <textarea id="noteText" placeholder="Write your note here..."></textarea>
+      <button onclick="addNote()">Add Note</button>
+    </div>
+
+    <div id="notesContainer" class="notes-container">
+    </div>
+  </div>
+  <script src="index.js"></script>
     <button onclick="document.getElementById('create_notes_form').style.display='flex'" class="add_btn"> <i
             class="fa fa-plus fa-lg add_icon" aria-hidden="true"></i></button>
 
