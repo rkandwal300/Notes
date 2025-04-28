@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Keep Notes</title>
-  <link rel="stylesheet" href="./css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Document</title>
 </head>
+
 <body>
 
   <div class="container">
@@ -20,5 +23,30 @@
     </div>
   </div>
   <script src="index.js"></script>
+    <button onclick="document.getElementById('create_notes_form').style.display='flex'" class="add_btn"> <i
+            class="fa fa-plus fa-lg add_icon" aria-hidden="true"></i></button>
+
+    <div id="create_notes_form">
+        <div>
+            <div class="notes_form_header">
+                <span>Add a note</span>
+                <div>
+                    <!-- <button disabled="true" class="bg-destructive text-foreground"><i class="fa fa-trash" aria-hidden="true"></i></button> -->
+                    <button class="bg-destructive text-foreground"
+                        onclick="document.getElementById('create_notes_form').style.display='none'"><i
+                            class="fa fa-times" aria-hidden="true"></i></button>
+                    <button class="bg-primary text-foreground"><i class="fa fa-check" aria-hidden="true"></i></button>
+                </div>
+            </div>
+            <div class="notes_form_body">
+
+
+                <p>
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis rem tempora, cupiditate facilis
+                    aperiam perspiciatis!</p>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>

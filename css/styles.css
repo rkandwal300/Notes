@@ -1,94 +1,83 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    padding: 20px;
-  }
-  
-  .container {
-    max-width: 800px;
-    margin: auto;
-  }
-  
-  h1 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .note-input {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.add_btn {
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    background-color: green;
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    border: 0px;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+#create_notes_form {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+}
+
+#create_notes_form>div {
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
-  }
-  
-  textarea {
-    resize: none;
-    padding: 10px;
-    font-size: 16px;
-    height: 100px;
-    margin-bottom: 10px;
-  }
-  
-  button {
-    padding: 10px;
-    background-color: #4caf50;
-    border: none;
+    width: 400px;
+
+    border: 1px solid rgb(151, 145, 145);
+    border-radius: 10px;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
+}
+
+.add_icon {
     color: white;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
-  .notes-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 15px;
-  }
-  
-  .note {
-    background-color: white;
-    padding: 15px;
-    border-radius: 8px;
-    position: relative;
-    word-wrap: break-word;
+    font-size: 60px;
+}
+
+.notes_form_header {
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
-    height: fit-content;; 
-  }
-  
-  .note-content {
-    flex-grow: 1;
-    overflow: auto;
-  }
-  
-  .note-buttons {
+    padding: 10px;
+    border-bottom: 1px solid gray;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.notes_form_header>div>button {
+      padding: 5px;
+      border: 1px solid rgb(151, 145, 145);
+    border-radius: 5px;
+    box-shadow: 0px 10px 10px rgba(86, 85, 85, 0.2);
+}
+.bg-primary {
+    background-color: green;
+}
+ 
+.bg-primary {
+    background-color: green;
+}
+.bg-destructive {
+    background-color: red;
+}
+.text-foreground {
+    color: white;
+}
+
+.notes_form_header> {
     display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 10px;
-  }
-  
-  .note-buttons button {
-    background: none;
-    border: 1px solid #ccc;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    color: #555;
-  }
-  
-  .note-buttons button:hover {
-    background-color: #f0f0f0;
-    color: #000;
-  }
-  
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid gray;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.notes_form_body {
+    padding: 10px;
+    border-bottom: 1px solid gray;
+}
