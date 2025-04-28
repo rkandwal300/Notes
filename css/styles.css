@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.add_btn {
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    background-color: green;
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    border: 0px;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+#create_notes_form {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+}
+
+#create_notes_form>div {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+
+    border: 1px solid rgb(151, 145, 145);
+    border-radius: 10px;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
+}
+
+.add_icon {
+    color: white;
+    font-size: 60px;
+}
+
+.notes_form_header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid gray;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.notes_form_header>div>button {
+      padding: 5px;
+      border: 1px solid rgb(151, 145, 145);
+    border-radius: 5px;
+    box-shadow: 0px 10px 10px rgba(86, 85, 85, 0.2);
+}
+.bg-primary {
+    background-color: green;
+}
+ 
+.bg-primary {
+    background-color: green;
+}
+.bg-destructive {
+    background-color: red;
+}
+.text-foreground {
+    color: white;
+}
+
+.notes_form_header> {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid gray;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.notes_form_body {
+    padding: 10px;
+    border-bottom: 1px solid gray;
+}
