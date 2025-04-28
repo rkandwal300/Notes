@@ -14,10 +14,7 @@
   <div class="container">
     <h1>Keep Notes</h1>
 
-    <div class="note-input">
-      <textarea id="noteText" placeholder="Write your note here..."></textarea>
-      <button onclick="addNote()">Add Note</button>
-    </div>
+    
 
     <div id="notesContainer" class="notes-container">
     </div>
@@ -56,8 +53,9 @@
 <script>
     const title = document.getElementById('title');
     const content = document.getElementById('description');
-
     const mainContent = document.getElementById('mainContent');
+    const noteActionsButton = document.getElementsByClassName('note-actions-button');
+
 
 
     function closeDialog() {
@@ -69,6 +67,15 @@
     function addData() {
         document.getElementById('create_notes_form').style.display = 'none'
         const existingNotes = JSON.parse(localStorage.getItem("myNotes")) || [];
+
+        if (title.value.length ==0 ){
+            window.alert("title should not be empty");
+            return
+        }
+        if(content.value.length ==0 ) {
+                window.alert("content should not be empty");
+            return
+        }
         const formData = {
             id:existingNotes.length,
             title: title.value,
@@ -88,42 +95,86 @@
     displayNotes();
 
     function displayNotes() {
-        mainContent.innerHTML = ''; // Clear existing content
+        mainContent.innerHTML = ''; 
 
         const notes = JSON.parse(localStorage.getItem("myNotes")) || [];
      
 
         notes.forEach((note, index) => {
             const noteDiv = document.createElement('div');
-            noteDiv.classList.add('note');
-            noteDiv.classList.add('single_note');
-     
+            noteDiv.classList.add('note', 'single_note');
             noteDiv.id = `note-${index}`;
+            noteDiv.dataset.noteId = note.id; // store note id inside data attribute
     
-            noteDiv.innerText = `${note.id + 1}. ${note.title}`;
-     
-            let pressTimer;
+            const titleDiv = document.createElement('div');
+            titleDiv.classList.add('note-title');
+            titleDiv.innerText = `${note.id + 1}. ${note.title}`;
     
-            noteDiv.addEventListener('mousedown', () => {
-                pressTimer = setTimeout(() => {
-                    console.log(`Long pressed on note id: ${noteDiv.id}`);
-                     
-                }, 800);  
-            });
+            const contentDiv = document.createElement('div');
+            contentDiv.classList.add('note-content');
+            contentDiv.innerText = note.content || 'No content available';
     
-            noteDiv.addEventListener('mouseup', () => {
-                clearTimeout(pressTimer);
-            });
+            const actionsDiv = document.createElement('div');
+            actionsDiv.classList.add('note-actions');
+            actionsDiv.style.display = 'none'; // initially hidden
     
-            noteDiv.addEventListener('mouseleave', () => {
-                clearTimeout(pressTimer);
-            });
+            const editButton = document.createElement('button');
+            editButton.classList.add('note-actions-button');
+            editButton.innerText = 'Edit';
+            editButton.onclick = () => handleEditNode(note.id);
+    
+            const deleteButton = document.createElement('button');
+            deleteButton.classList.add('note-actions-button');
+            deleteButton.innerText = 'Delete';
+            deleteButton.onclick = () => handleDeleteNode(note.id);
+    
+            actionsDiv.appendChild(editButton);
+            actionsDiv.appendChild(deleteButton);
+    
+            noteDiv.appendChild(titleDiv);
+            noteDiv.appendChild(contentDiv);
+            noteDiv.appendChild(actionsDiv);
     
             mainContent.appendChild(noteDiv);
         });
     }
-
-    setTimeout(displayNotes, 1000);
+    
+    let pressTimer;
+    let currentlyOpenActionsDiv = null;  
+    
+    mainContent.addEventListener('mousedown', (event) => {
+        const noteDiv = event.target.closest('.note');
+        if (!noteDiv) return;
+    
+        pressTimer = setTimeout(() => {
+            const actionsDiv = noteDiv.querySelector('.note-actions');
+            if (actionsDiv) { 
+                if (currentlyOpenActionsDiv && currentlyOpenActionsDiv !== actionsDiv) {
+                    currentlyOpenActionsDiv.style.display = 'none';
+                }
+    
+                actionsDiv.style.display = 'block';
+                currentlyOpenActionsDiv = actionsDiv;  
+            }
+        }, 800);
+    });
+    
+    mainContent.addEventListener('mouseup', () => {
+        clearTimeout(pressTimer);
+    });
+    
+    mainContent.addEventListener('mouseleave', () => {
+        clearTimeout(pressTimer);
+    });
+    
+    
+    document.addEventListener('mousedown', (event) => {
+        const isInsideNote = event.target.closest('.note');
+        if (!isInsideNote && currentlyOpenActionsDiv) {
+            currentlyOpenActionsDiv.style.display = 'none';
+            currentlyOpenActionsDiv = null;
+        }
+    });
 
 </script>
 

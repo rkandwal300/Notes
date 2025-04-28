@@ -25,11 +25,13 @@
     width: 100%;
 
 }
+
 #mainContent {
-    display: flex; 
-    gap:10px;
+    display: flex;
+    gap: 10px;
     flex-wrap: wrap;
 }
+
 .single_note {
     height: 400px
 }
@@ -39,6 +41,7 @@
     flex-direction: column;
     width: 400px;
 
+    background-color: white;
     border: 1px solid rgb(151, 145, 145);
     border-radius: 10px;
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
@@ -47,6 +50,17 @@
 .add_icon {
     color: white;
     font-size: 60px;
+}
+
+.note-actions {
+    height: 40px;
+    display: flex;
+    width: 100%;
+    gap: 5px
+}
+
+.note-actions-button {
+    width: 100%;
 }
 
 .notes_form_header {
@@ -114,116 +128,116 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f5f5f5;
     padding: 20px;
-  }
- 
-  .container {
+}
+
+.container {
     max-width: 800px;
     margin: auto;
-  }
- 
-  h1 {
+}
+
+h1 {
     text-align: center;
     margin-bottom: 20px;
-  }
- 
-  .note-input {
+}
+
+.note-input {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
-  }
- 
-  textarea {
+}
+
+textarea {
     resize: none;
     padding: 10px;
     font-size: 16px;
     height: 100px;
     margin-bottom: 10px;
-  }
- 
-  button {
+}
+
+button {
     padding: 10px;
     background-color: #4caf50;
     border: none;
     color: white;
     font-size: 16px;
     cursor: pointer;
-  }
- 
-  button:hover {
+}
+
+button:hover {
     background-color: #45a049;
-  }
- 
-  .notes-container {
+}
+
+.notes-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 15px;
-  }
-  .note {
+}
+
+.note {
 
     background-color: white;
-  
+
     padding: 15px;
-  
+
     border-radius: 8px;
-  
+
     position: relative;
-  
+
     word-wrap: break-word;
-  
+
     display: flex;
-  
+
     flex-direction: column;
-  
+
     justify-content: space-between;
-  
-    height: 150px; /* fixed height */
-  
-  }
-   
-  .note-content {
-  
+
+    height: 150px;
+    /* fixed height */
+
+}
+
+.note-content {
+
     flex-grow: 1;
-  
+
     overflow: auto;
-  
-  }
-   
-  .note-buttons {
-  
+
+}
+
+.note-buttons {
+
     display: flex;
-  
+
     justify-content: flex-end;
-  
+
     gap: 10px;
-  
+
     margin-top: 10px;
-  
-  }
-   
-  .note-buttons button {
-  
+
+}
+
+.note-buttons button {
+
     background: none;
-  
+
     border: 1px solid #ccc;
-  
+
     padding: 5px 10px;
-  
+
     border-radius: 4px;
-  
+
     cursor: pointer;
-  
+
     font-size: 14px;
-  
+
     color: #555;
-  
-  }
-   
-  .note-buttons button:hover {
-  
+
+}
+
+.note-buttons button:hover {
+
     background-color: #f0f0f0;
-  
+
     color: #000;
-  
-  }
-  
-   
+
+}
