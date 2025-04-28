@@ -11,15 +11,13 @@
 
 <body>
 
-    <div class="container">
-        <h1>Keep Notes</h1>
+    <header class="header">Keep Notes</header>
 
 
 
-        <div id="notesContainer" class="notes-container">
-        </div>
+    <div id="notesContainer" class="notes-container">
+
     </div>
-    <script src="index.js"></script>
     <button onclick="document.getElementById('create_notes_form').style.display='flex'" class="add_btn"> <i
             class="fa fa-plus fa-lg add_icon" aria-hidden="true"></i></button>
 
@@ -50,6 +48,7 @@
 
     <div id="mainContent"></div>
 </body>
+<script src="index.js"></script>
 <script>
 
     let editingNoteId = null
@@ -89,7 +88,7 @@
                 ...formData,
                 id: editingNoteId,
             }
-         const   updatedNotes = existingNotes.map(node =>
+            const updatedNotes = existingNotes.map(node =>
                 node.id === editingNoteId ? { ...node, ...formData } : node
             )
             localStorage.setItem("myNotes", JSON.stringify(updatedNotes));

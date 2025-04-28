@@ -4,6 +4,13 @@
     font-family: 'Courier New', Courier, monospace;
 }
 
+.header {
+    font-size: 30px;
+    font-weight: 600;
+    padding: 20px;
+    border-bottom: 2px solid black;
+}
+
 .add_btn {
     position: fixed;
     bottom: 50px;
@@ -83,10 +90,7 @@
     background-color: green;
 }
 
-.bg-primary {
-    background-color: green;
-}
-
+ 
 .bg-destructive {
     background-color: red;
 }
@@ -124,15 +128,16 @@
 }
 
 /* ............................................... */
-body {
+/* body {
     font-family: Arial, sans-serif;
     background-color: #f5f5f5;
     padding: 20px;
-}
+} */
 
 .container {
     max-width: 800px;
     margin: auto;
+    padding: 20px;
 }
 
 h1 {
