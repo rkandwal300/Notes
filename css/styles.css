@@ -17,11 +17,21 @@
 }
 
 #create_notes_form {
+    position: absolute;
+    z-index: 100000;
     display: none;
     justify-content: center;
     align-items: center;
     width: 100%;
 
+}
+#mainContent {
+    display: flex; 
+    gap:10px;
+    flex-wrap: wrap;
+}
+.single_note {
+    height: 400px
 }
 
 #create_notes_form>div {
@@ -49,21 +59,24 @@
 }
 
 .notes_form_header>div>button {
-      padding: 5px;
-      border: 1px solid rgb(151, 145, 145);
+    padding: 5px;
+    border: 1px solid rgb(151, 145, 145);
     border-radius: 5px;
     box-shadow: 0px 10px 10px rgba(86, 85, 85, 0.2);
 }
+
 .bg-primary {
     background-color: green;
 }
- 
+
 .bg-primary {
     background-color: green;
 }
+
 .bg-destructive {
     background-color: red;
 }
+
 .text-foreground {
     color: white;
 }
@@ -80,4 +93,137 @@
 .notes_form_body {
     padding: 10px;
     border-bottom: 1px solid gray;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
+
+
+.data_field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.data_field>label {
+    font-weight: 600;
+}
+
+/* ............................................... */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    padding: 20px;
+  }
+ 
+  .container {
+    max-width: 800px;
+    margin: auto;
+  }
+ 
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+ 
+  .note-input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+ 
+  textarea {
+    resize: none;
+    padding: 10px;
+    font-size: 16px;
+    height: 100px;
+    margin-bottom: 10px;
+  }
+ 
+  button {
+    padding: 10px;
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+ 
+  button:hover {
+    background-color: #45a049;
+  }
+ 
+  .notes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+  }
+  .note {
+
+    background-color: white;
+  
+    padding: 15px;
+  
+    border-radius: 8px;
+  
+    position: relative;
+  
+    word-wrap: break-word;
+  
+    display: flex;
+  
+    flex-direction: column;
+  
+    justify-content: space-between;
+  
+    height: 150px; /* fixed height */
+  
+  }
+   
+  .note-content {
+  
+    flex-grow: 1;
+  
+    overflow: auto;
+  
+  }
+   
+  .note-buttons {
+  
+    display: flex;
+  
+    justify-content: flex-end;
+  
+    gap: 10px;
+  
+    margin-top: 10px;
+  
+  }
+   
+  .note-buttons button {
+  
+    background: none;
+  
+    border: 1px solid #ccc;
+  
+    padding: 5px 10px;
+  
+    border-radius: 4px;
+  
+    cursor: pointer;
+  
+    font-size: 14px;
+  
+    color: #555;
+  
+  }
+   
+  .note-buttons button:hover {
+  
+    background-color: #f0f0f0;
+  
+    color: #000;
+  
+  }
+  
+   
