@@ -11,15 +11,15 @@
 
 <body>
 
-  <div class="container">
-    <h1>Keep Notes</h1>
+    <div class="container">
+        <h1>Keep Notes</h1>
 
-    
 
-    <div id="notesContainer" class="notes-container">
+
+        <div id="notesContainer" class="notes-container">
+        </div>
     </div>
-  </div>
-  <script src="index.js"></script>
+    <script src="index.js"></script>
     <button onclick="document.getElementById('create_notes_form').style.display='flex'" class="add_btn"> <i
             class="fa fa-plus fa-lg add_icon" aria-hidden="true"></i></button>
 
@@ -51,6 +51,9 @@
     <div id="mainContent"></div>
 </body>
 <script>
+
+    let editingNoteId = null
+
     const title = document.getElementById('title');
     const content = document.getElementById('description');
     const mainContent = document.getElementById('mainContent');
@@ -68,22 +71,38 @@
         document.getElementById('create_notes_form').style.display = 'none'
         const existingNotes = JSON.parse(localStorage.getItem("myNotes")) || [];
 
-        if (title.value.length ==0 ){
+        if (title.value.length == 0) {
             window.alert("title should not be empty");
             return
         }
-        if(content.value.length ==0 ) {
-                window.alert("content should not be empty");
+        if (content.value.length == 0) {
+            window.alert("content should not be empty");
             return
         }
-        const formData = {
-            id:existingNotes.length,
+        let formData = {
             title: title.value,
             content: content.value
-        }
-        existingNotes.push(formData);
+        };
 
-        localStorage.setItem("myNotes", JSON.stringify(existingNotes));
+        if (editingNoteId !== null) {
+            formData = {
+                ...formData,
+                id: editingNoteId,
+            }
+         const   updatedNotes = existingNotes.map(node =>
+                node.id === editingNoteId ? { ...node, ...formData } : node
+            )
+            localStorage.setItem("myNotes", JSON.stringify(updatedNotes));
+        } else {
+
+            formData = {
+                ...formData,
+                id: existingNotes.length,
+            }
+            existingNotes.push(formData);
+            localStorage.setItem("myNotes", JSON.stringify(existingNotes));
+        }
+
 
         title.value = '';
         content.value = '';
@@ -95,79 +114,79 @@
     displayNotes();
 
     function displayNotes() {
-        mainContent.innerHTML = ''; 
+        mainContent.innerHTML = '';
 
         const notes = JSON.parse(localStorage.getItem("myNotes")) || [];
-     
+
 
         notes.forEach((note, index) => {
             const noteDiv = document.createElement('div');
             noteDiv.classList.add('note', 'single_note');
             noteDiv.id = `note-${index}`;
-            noteDiv.dataset.noteId = note.id; // store note id inside data attribute
-    
+            noteDiv.dataset.noteId = note.id;
+
             const titleDiv = document.createElement('div');
             titleDiv.classList.add('note-title');
             titleDiv.innerText = `${note.id + 1}. ${note.title}`;
-    
+
             const contentDiv = document.createElement('div');
             contentDiv.classList.add('note-content');
             contentDiv.innerText = note.content || 'No content available';
-    
+
             const actionsDiv = document.createElement('div');
             actionsDiv.classList.add('note-actions');
-            actionsDiv.style.display = 'none'; // initially hidden
-    
+            actionsDiv.style.display = 'none';
+
             const editButton = document.createElement('button');
             editButton.classList.add('note-actions-button');
             editButton.innerText = 'Edit';
             editButton.onclick = () => handleEditNode(note.id);
-    
+
             const deleteButton = document.createElement('button');
             deleteButton.classList.add('note-actions-button');
             deleteButton.innerText = 'Delete';
             deleteButton.onclick = () => handleDeleteNode(note.id);
-    
+
             actionsDiv.appendChild(editButton);
             actionsDiv.appendChild(deleteButton);
-    
+
             noteDiv.appendChild(titleDiv);
             noteDiv.appendChild(contentDiv);
             noteDiv.appendChild(actionsDiv);
-    
+
             mainContent.appendChild(noteDiv);
         });
     }
-    
+
     let pressTimer;
-    let currentlyOpenActionsDiv = null;  
-    
+    let currentlyOpenActionsDiv = null;
+
     mainContent.addEventListener('mousedown', (event) => {
         const noteDiv = event.target.closest('.note');
         if (!noteDiv) return;
-    
+
         pressTimer = setTimeout(() => {
             const actionsDiv = noteDiv.querySelector('.note-actions');
-            if (actionsDiv) { 
+            if (actionsDiv) {
                 if (currentlyOpenActionsDiv && currentlyOpenActionsDiv !== actionsDiv) {
                     currentlyOpenActionsDiv.style.display = 'none';
                 }
-    
+
                 actionsDiv.style.display = 'block';
-                currentlyOpenActionsDiv = actionsDiv;  
+                currentlyOpenActionsDiv = actionsDiv;
             }
         }, 800);
     });
-    
+
     mainContent.addEventListener('mouseup', () => {
         clearTimeout(pressTimer);
     });
-    
+
     mainContent.addEventListener('mouseleave', () => {
         clearTimeout(pressTimer);
     });
-    
-    
+
+
     document.addEventListener('mousedown', (event) => {
         const isInsideNote = event.target.closest('.note');
         if (!isInsideNote && currentlyOpenActionsDiv) {
@@ -175,6 +194,24 @@
             currentlyOpenActionsDiv = null;
         }
     });
+
+    function handleDeleteNode(noteId) {
+        const notes = JSON.parse(localStorage.getItem("myNotes")) || [];
+        localStorage.setItem("myNotes", JSON.stringify(notes.filter(note => note.id !== noteId)));
+        displayNotes()
+    }
+
+
+    function handleEditNode(noteId) {
+        const notes = JSON.parse(localStorage.getItem("myNotes")) || [];
+        const currentNote = notes.find(note => note.id === noteId);
+        if (!currentNote) return;
+        editingNoteId = currentNote.id
+
+        document.getElementById('create_notes_form').style.display = 'flex';
+        title.value = currentNote.title;
+        content.value = currentNote.content;
+    }
 
 </script>
 
