@@ -14,10 +14,7 @@
     <header class="header">Keep Notes</header>
 
 
-
-    <div id="notesContainer" class="notes-container">
-
-    </div>
+ 
     <button onclick="document.getElementById('create_notes_form').style.display='flex'" class="add_btn"> <i
             class="fa fa-plus fa-lg add_icon" aria-hidden="true"></i></button>
 
@@ -143,6 +140,7 @@
 
             const deleteButton = document.createElement('button');
             deleteButton.classList.add('note-actions-button');
+            deleteButton.classList.add('bg-destructive');
             deleteButton.innerText = 'Delete';
             deleteButton.onclick = () => handleDeleteNode(note.id);
 
